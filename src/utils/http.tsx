@@ -5,7 +5,10 @@ console.log(config)
 // // 创建axios实例
 var instance = axios.create({
   timeout: 1000 * 12,
-  headers: { 'app-key': config.appkey }
+  headers: {
+    'app-key': config.appkey,
+    "token": config.token
+  }
 });
 
 // 设置post请求头
