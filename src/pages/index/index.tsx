@@ -1,7 +1,23 @@
 import React from 'react';
 import Index from "../../models/index";
-import { Carousel, WingBlank } from 'antd-mobile';
-import { Header, SearchWrapper, SearchContent, SearchIcon, SearchPlacehold } from './style';
+
+
+import { Carousel } from 'antd-mobile';
+import {
+  AllWrap,
+  Header,
+  SearchWrapper,
+  SearchContent,
+  SearchIcon,
+  SearchPlacehold,
+  InterestWrapper,
+  InterestTitle,
+  InterestContent,
+  InterestItemWrap,
+  InterestItem,
+  InterestItemPic,
+  InterestItemText,
+} from './style';
 
 
 interface IState {
@@ -18,7 +34,7 @@ interface IProps {
 
 class App extends React.Component<IProps, IState> {
 
-  public constructor(props: any) {
+  public constructor(props: IProps) {
     super(props);
     this.state = {
       dataInfo: {
@@ -32,7 +48,7 @@ class App extends React.Component<IProps, IState> {
   public componentDidMount() {
     //加载首页数据
     Index.indexData().then(res => {
-      console.log(res)
+      // console.log(res)
       const data = res.data;
       console.log(data)
       this.setState({
@@ -47,37 +63,60 @@ class App extends React.Component<IProps, IState> {
     const { activity, category } = this.state.dataInfo;
     // console.log(this.state.dataInfo)
     return (
-      <div className="index">
+      <AllWrap>
         <Header>你知道吗</Header>
-        {/*搜索框*/}
+        {/*搜索框 start*/}
         <SearchWrapper>
           <SearchContent>
             <SearchIcon></SearchIcon>
             <SearchPlacehold>请输入搜索内容</SearchPlacehold>
           </SearchContent>
         </SearchWrapper>
+        {/*搜索框 end*/}
 
 
-        <WingBlank>
-          <Carousel
-            autoplay={false}
-          >
-            {activity.map((item: any) => (
-              <img
-                src={item.activity_img[0].img}
-                key={item.activity_img[0].id}
-                alt=""
-                onLoad={() => {
-                  this.setState({ 
-                    imgHeight: 'auto' 
+        {/*banner图 start*/}
+        <Carousel
+          autoplay={false}
+        >
+          {activity.map((item: any) => (
+            <img
+              src={item.activity_img[0].img}
+              key={item.activity_img[0].id}
+              alt={item.title}
+              onLoad={() => {
+                this.setState({
+                  imgHeight: 'auto'
                 });
-                }}
-              />
-            ))}
-          </Carousel>
-        </WingBlank>
+              }}
+            />
+          ))}
+        </Carousel>
+        {/*banner图 end*/}
 
-      </div>
+        {/* 兴趣圈子 start */}
+        <InterestWrapper>
+          <InterestTitle>兴趣圈子</InterestTitle>
+          <InterestContent>
+            {
+              category.map((item: any) => {
+                return (
+                  <InterestItemWrap key={item.id}>
+                    <InterestItem>
+                      <InterestItemPic src={item.img}  ></InterestItemPic>
+                      <InterestItemText>{item.name}</InterestItemText>
+                    </InterestItem>
+                  </InterestItemWrap>
+                )
+              })
+            }
+          </InterestContent>
+        </InterestWrapper>
+        {/* 兴趣圈子 start */}
+
+
+
+      </AllWrap>
     )
   }
 

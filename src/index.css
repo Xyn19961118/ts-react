@@ -78,6 +78,7 @@ td {
   outline: 0;
   vertical-align: baseline;
   background: transparent;
+  touch-action: none;
 }
 
 body {

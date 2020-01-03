@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import SearchIconImg from '../../static/search-icon.png';
 
+export const AllWrap = styled.div `
+  min-height: 100vh;
+  background: #fff;
+`;
 export const Header = styled.div `
   width:100%;
   height:.4rem;
@@ -40,4 +44,55 @@ export const SearchIcon = styled.div`
 export const SearchPlacehold = styled.div`
   font-size: .14rem;
   margin-left: .1rem;
+`
+export const BannerWrapper = styled.div`
+ & .am-wingblank.am-wingblank-lg {
+   margin-left: 0;
+   margin-right: 0;
+ } 
+`
+
+export const InterestWrapper = styled.div`
+
+`
+export const InterestTitle = styled.div`
+  padding: .2rem;
+  text-align: center;
+  color: #333;
+  font-size: .16rem;
+`
+
+export const InterestContent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+export const InterestItemWrap = styled.div`
+  width: 33.33%;
+  margin-bottom: .1rem;
+`
+export const InterestItem = styled.div`
+  width: .9rem;
+  margin: auto;
+  border: #eee .01rem solid;
+  border-radius: .04rem;
+  height: 1rem;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+`
+export const InterestItemPic = styled.img`
+  width: .48rem;
+  height: .48rem;
+`
+export const InterestItemText = styled.div`
+  width: 100%;
+  text-align: center;
+  margin-top: .1rem;
+`
+
+//分类列表
+
+export const CategoryWrapper = styled.div`
+  width: 100%;
 `
