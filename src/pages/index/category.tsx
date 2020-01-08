@@ -1,5 +1,5 @@
 import React from "react";
-import { NavBar, Icon, Tabs, Badge } from 'antd-mobile';
+import { NavBar, Icon, Tabs, Badge, PullToRefresh } from 'antd-mobile';
 import Index from '../../models/index';
 import ClassifyNewItem from "../../components/common/classifyNewItem";
 import {
@@ -14,9 +14,9 @@ interface IState {
   NavText: string,
   page: number,
   pagesize: number,
-  hotList: Array<object>,
-  newList: Array<object>,
-  pullStatus: string
+  hotList: Array<any>,
+  newList: Array<any>,
+  pullStatus: boolean
 }
 
 interface IProps {
@@ -32,7 +32,7 @@ class Category extends React.Component<IProps, IState> {
       pagesize: 20,
       hotList: [],
       newList: [],
-      pullStatus: 'up'
+      pullStatus: true
     }
   }
   public componentDidMount() {
@@ -61,6 +61,8 @@ class Category extends React.Component<IProps, IState> {
 
 
   }
+
+
   public render() {
     const tabs = [
       { title: <Badge >最新</Badge> },
@@ -83,22 +85,31 @@ class Category extends React.Component<IProps, IState> {
         >
 
           <CategoryNewItems>
-
-            {
-              newList.map((item: any) => {
-                // console.log(item)
-                return (
-                  <CategoryItem key={item.id}>
-                    <ClassifyNewItem></ClassifyNewItem>
-                  </CategoryItem>
-                )
-              })
-            }
+            <PullToRefresh
+              direction={this.state.pullStatus?'down':'up'}
+              distanceToRefresh={50}
+              refreshing={true}
+              onRefresh={() => { console.log('aa') }}
+              indicator={{}}
+              damping={100}
+              getScrollContainer={()=>undefined}
+            >
+              {
+                newList.map((item: any) => {
+                  // console.log(item)
+                  return (
+                    <CategoryItem key={item.id}>
+                      <ClassifyNewItem></ClassifyNewItem>
+                    </CategoryItem>
+                  )
+                })
+              }
+            </PullToRefresh>
           </CategoryNewItems>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
             <div style={{ width: '100%', height: '500px' }}>
-              {/* <PullToRefresh></PullToRefresh> */}
+
 
             </div>
           </div>
