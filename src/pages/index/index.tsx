@@ -1,7 +1,6 @@
 import React from 'react';
 import Index from "../../models/index";
-
-
+import { Link } from "react-router-dom";
 import { Carousel } from 'antd-mobile';
 import {
   AllWrap,
@@ -50,7 +49,7 @@ class App extends React.Component<IProps, IState> {
     Index.indexData().then(res => {
       // console.log(res)
       const data = res.data;
-      console.log(data)
+      // console.log(data)
       this.setState({
         dataInfo: data
       })
@@ -102,10 +101,21 @@ class App extends React.Component<IProps, IState> {
               category.map((item: any) => {
                 return (
                   <InterestItemWrap key={item.id}>
-                    <InterestItem>
-                      <InterestItemPic src={item.img}  ></InterestItemPic>
-                      <InterestItemText>{item.name}</InterestItemText>
-                    </InterestItem>
+                    <Link to={
+                      {
+                        pathname:`category/${item.id}/${item.name}`,
+                        state:{
+                          id: item.id,
+                          name: item.name
+                        }
+                      }
+                    }>
+                      <InterestItem>
+                        <InterestItemPic src={item.img}  ></InterestItemPic>
+                        <InterestItemText>{item.name}</InterestItemText>
+                      </InterestItem>
+                    </Link>
+
                   </InterestItemWrap>
                 )
               })

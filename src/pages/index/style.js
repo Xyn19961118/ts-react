@@ -95,4 +95,14 @@ export const InterestItemText = styled.div`
 
 export const CategoryWrapper = styled.div`
   width: 100%;
+  min-height: 100vh;
+  background: #efeff4;
+`
+export const CategoryNewItems = styled.div`
+  width: 100%;
+  height: calc(100vh - 89px);
+  overflow-y: scroll;
+`
+export const CategoryItem = styled.div`
+  margin-top: .1rem;
 `
